@@ -1,95 +1,49 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use server";
 
-export default function Home() {
+export default async function() {
+  // From Google Play store:
+  // curve images + shadow
+  // gray outline + no grid padding (horizontal margins can be narrow)
+  // decent spacing under title
+  // no spacing for subtext
+  // extra padding on bottoms of items
+  // do not change item size depending on screen width
+  // center grid on large screens / center always
+  // on mobile (single column) => have enough padding
+
+  // From Github:
+  // - when you have limited content, show unnecessary header text
+
+  // From tailwindcss:
+  // - align header w/ grid
+  // - header doesn't need to be a different color, use a thin line instead
+  // - use inter (done by default?)
+
+  // From langshift:
+  // logo tricks => contrast keyword vs generic word
+
+  async function createGame(formData) {
+    "use server";
+    const obj = Object.fromEntries(formData);
+    const gameId = obj["game"];
+    console.log(gameId);
+  }
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <>
+        {[{id: 1}, {id: 2}, {id: 3}].map((item) => (
+        <form action={createGame}>
+          <button
+            name="game"
+            value={item.id}
+            type="submit"
+            key={item.id}
+            className="p-4 hover:bg-gray-100 rounded-lg cursor-pointer"
           >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+          </button>
+        </form>
+      ))}
+    </>
+  );
 }
+
